@@ -36,10 +36,10 @@ W dowolnej chwili możesz je wypłacić na www.starbonus.pl
 
 == Changelog ==
 
-= 1.0.0 =
-Pierwsza wersja pluginu StarBonus Widget
-
 = 1.0.1 =
 Poprawa panelu administracji
 Ustawienei cyklu życia ciasteczka
+
+= 1.0.0 =
+Pierwsza wersja pluginu StarBonus Widget
 
