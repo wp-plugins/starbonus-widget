@@ -1,9 +1,9 @@
 === StarBonus Widget ===
 Contributors: Varya
 Tags: starbonus, widget, cashback
-Requires at least: 1.0.0
-Tested up to: 1.0.0
-Stable tag: 1.0.0
+Requires at least: 1.0.1
+Tested up to: 1.0.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,5 +36,10 @@ W dowolnej chwili możesz je wypłacić na www.starbonus.pl
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 Pierwsza wersja pluginu StarBonus Widget
+
+= 1.0.1 =
+Poprawa panelu administracji
+Ustawienei cyklu życia ciasteczka
+
