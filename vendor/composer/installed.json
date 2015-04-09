@@ -1,18 +1,17 @@
 [
     {
         "name": "zendframework/zend-stdlib",
-        "version": "2.3.7",
-        "version_normalized": "2.3.7.0",
-        "target-dir": "Zend/Stdlib",
+        "version": "2.4.0",
+        "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/Component_ZendStdlib.git",
-            "reference": "3f6e2416183d4879a983680e1165f14164b262f4"
+            "reference": "eab586f4c18af3fa63c977611939f1f4a3cf1030"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/3f6e2416183d4879a983680e1165f14164b262f4",
-            "reference": "3f6e2416183d4879a983680e1165f14164b262f4",
+            "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/eab586f4c18af3fa63c977611939f1f4a3cf1030",
+            "reference": "eab586f4c18af3fa63c977611939f1f4a3cf1030",
             "shasum": ""
         },
         "require": {
@@ -30,7 +29,7 @@
             "zendframework/zend-serializer": "Zend\\Serializer component",
             "zendframework/zend-servicemanager": "To support hydrator plugin manager usage"
         },
-        "time": "2015-03-12 16:55:53",
+        "time": "2015-04-01 18:09:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -40,7 +39,7 @@
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
+            "psr-4": {
                 "Zend\\Stdlib\\": ""
             }
         },
@@ -119,6 +118,42 @@
         ]
     },
     {
+        "name": "varya/starbonus-widget-api",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "git@gitlab.kusmierz.be:varya/starbonus-widget-api.git",
+            "reference": "e03737be810250305a3ae8735b50ab35fe089f2b"
+        },
+        "require": {
+            "lusitanian/oauth": "~0.3",
+            "zendframework/zend-stdlib": "2.*"
+        },
+        "time": "2015-04-09 10:26:27",
+        "type": "project",
+        "installation-source": "source",
+        "autoload": {
+            "files": [],
+            "psr-4": {
+                "OAuth\\": "src/",
+                "Starbonus\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Varya",
+                "email": "kontakt@varya.pro",
+                "homepage": "http://www.varya.pro/",
+                "role": "Developer"
+            }
+        ],
+        "homepage": "http://www.starbonus.pl/"
+    },
+    {
         "name": "jakeasmith/http_build_url",
         "version": "0.1.5",
         "version_normalized": "0.1.5.0",
@@ -155,41 +190,5 @@
             }
         ],
         "description": "Provides functionality for http_build_url() to environments without pecl_http."
-    },
-    {
-        "name": "varya/starbonus-widget-api",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git@gitlab.kusmierz.be:varya/starbonus-widget-api.git",
-            "reference": "13f5f22abdbb2f64722162cf2104678ad917ce07"
-        },
-        "require": {
-            "lusitanian/oauth": "~0.3",
-            "zendframework/zend-stdlib": "2.*"
-        },
-        "time": "2015-04-01 12:51:14",
-        "type": "project",
-        "installation-source": "source",
-        "autoload": {
-            "files": [],
-            "psr-4": {
-                "OAuth\\": "src/",
-                "Starbonus\\": "src/"
-            }
-        },
-        "license": [
-            "proprietary"
-        ],
-        "authors": [
-            {
-                "name": "Varya",
-                "email": "kontakt@varya.pro",
-                "homepage": "http://www.varya.pro/",
-                "role": "Developer"
-            }
-        ],
-        "homepage": "http://www.starbonus.pl/"
     }
 ]

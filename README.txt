@@ -38,4 +38,3 @@ W dowolnej chwili możesz je wypłacić na www.starbonus.pl
 
 = 1.0 =
 Pierwsza wersja pluginu StarBonus Widget
-

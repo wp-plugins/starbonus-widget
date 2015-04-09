@@ -18,9 +18,9 @@ class TransactionCashbackState extends AbstractType
     /**
      * @var array
      */
-    protected static $values = [
+    protected static $values = array(
         self::STATE_PENDING,
         self::STATE_ACCEPTED,
-        self::STATE_DELETED
-    ];
+        self::STATE_DELETED,
+    );
 }
