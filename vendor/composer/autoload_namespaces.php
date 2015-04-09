@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib'),
     'OAuth\\Unit' => array($vendorDir . '/lusitanian/oauth/tests'),
     'OAuth' => array($vendorDir . '/lusitanian/oauth/src'),
 );

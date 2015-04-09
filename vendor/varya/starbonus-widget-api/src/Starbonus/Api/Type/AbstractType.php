@@ -20,7 +20,7 @@ abstract class AbstractType implements TypeInterface
     /**
      * @var array
      */
-    protected static $values = [];
+    protected static $values = array();
 
     /**
      * Returns available values for this type
