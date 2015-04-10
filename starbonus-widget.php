@@ -69,7 +69,7 @@ if (!class_exists('StarBonusPlugin')) :
         private function includes()
         {
             include_once('includes/class-sb-install.php');
-            require_once(__DIR__ . '/vendor/autoload.php');
+            require_once('vendor/autoload.php');
         }
 
         /**
