@@ -5,7 +5,7 @@
  * Plugin URI: kontakt@starbonus.pl
  * Description: Starbonus widget.
  * Author: Varya
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 
 if (!class_exists('StarBonusPlugin')) :
@@ -19,7 +19,7 @@ if (!class_exists('StarBonusPlugin')) :
         /**
          * @var StarBonusPlugin instance of the class
          */
-        protected static $instance = null;
+        static protected $instance = null;
 
         /**
          * @var string table_prefix
@@ -53,12 +53,6 @@ if (!class_exists('StarBonusPlugin')) :
 
             $this->includes();
             $this->init_hooks();
-
-            $schedules = array(
-                'minutely'     => array( 'interval' => MINUTE_IN_SECONDS,      'display' => __( 'Once Minutely' ) ),
-            );
-
-            array_merge( apply_filters( 'cron_schedules', array() ), $schedules );
 
             $this->table_name = $wpdb->prefix . 'starbonus_order_status_config';
         }
@@ -150,17 +144,28 @@ if (!class_exists('StarBonusPlugin')) :
             if (get_option('starbonus_open_widget_ever') ||
                 (get_option('starbonus_open_widget_when_redirect') && $_COOKIE['starbonus_redirect'])
             ) {
-                echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js"></script>';
-                echo '<script>
+                echo '<script type="text/javascript">
+                        <!-- // <![CDATA[
+
                         var urlApi = "' . get_option('starbonus_url_api') . '",
                             urlJs = "' . get_option('starbonus_url_js') . '",
-                            programId = "' . get_option('starbonus_program_id') . '",
+                            programId = ' . get_option('starbonus_program_id') . ',
                             source = "' . get_option('starbonus_source') . '",
-                            cookieExpire = "' . get_option('starbonus_cookie_expire') . '" || 30;
+                            cookieExpire = parseInt(' . (get_option('starbonus_cookie_expire') * 24 * 60 * 60) . ' || 2592000, 10);
 
-                        var starbonus_widget_config = {\'api\': {\'url\': urlApi}, \'cookie\': {\'defaults\': {\'expires\': cookieExpire }}, \'widget\': {\'program\': programId,\'source\': source}};
-                        require([urlJs]);
-                      </script>';
+                        (function(i,s,o,g,r,a,m){i[\'StarbonusWidgetObject\']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,\'script\',urlJs,\'_sbwidget\');
+
+                        _sbwidget(\'config\', {
+                            \'api\': {\'url\': urlApi},
+                            \'widget\': {\'program\': programId, \'source\': source},
+                            \'cookie\': {\'defaults\': {\'expires\': cookieExpire}}
+                        });
+
+                        // ]]> -->
+                    </script>';
             }
         }
 
@@ -311,7 +316,7 @@ if (!class_exists('StarBonusPlugin')) :
 
             $entity = new \Starbonus\Api\Entity\TransactionCashback();
             $entity
-                ->setTransaction($order->get_order_number())
+                ->setTransaction('wordpress-' . $order->get_order_number())
                 ->setClick($clickId)
                 ->setAmountPurchase(($order->get_total() - (get_option('starbonus_shipping_cost') ? $order->get_total_shipping() : 0)) * 100)
                 ->setCurrency($order->get_order_currency())
@@ -568,7 +573,6 @@ if (!class_exists('StarBonusPlugin')) :
             if ($order_configs && is_array($order_configs) && count($order_configs) > 0) {
                 foreach ($order_configs as $order_config) {
                     $order = new \WC_Order($order_config->order_id);
-                    // przypadek 1.
                     $this->createTransactionCashback($order, $order_config->click_id);
                 }
             }
@@ -757,8 +761,6 @@ if (!class_exists('StarBonusPlugin')) :
          * @param $clientId
          * @param $clientPassword
          * @param $programId
-         * @param $offerId
-         * @param $bonusId
          * @param $source
          * @param $cookieExpire
          * @param $openWidgetExpired

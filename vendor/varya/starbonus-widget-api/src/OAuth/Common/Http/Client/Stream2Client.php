@@ -29,8 +29,7 @@ class Stream2Client extends StreamClient
         $requestBody,
         array $extraHeaders = array(),
         $method = 'POST'
-    )
-    {
+    ) {
         // Normalize method name
         $method = strtoupper($method);
 
@@ -60,6 +59,7 @@ class Stream2Client extends StreamClient
 
         $context = $this->generateStreamContext($requestBody, $extraHeaders, $method);
 
+        $firstError = error_get_last();
         $level = error_reporting(0);
 
         $stream = fopen($endpoint->getAbsoluteUri(), 'r', false, $context);
@@ -91,7 +91,7 @@ class Stream2Client extends StreamClient
             }
         }
 
-        if (!empty($lastError) && is_array($lastError)) {
+        if ($firstError !== $lastError && !empty($lastError) && is_array($lastError)) {
             throw new TokenResponseException($lastError['message']);
         }
 

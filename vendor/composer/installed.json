@@ -1,5 +1,43 @@
 [
     {
+        "name": "jakeasmith/http_build_url",
+        "version": "0.1.5",
+        "version_normalized": "0.1.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jakeasmith/http_build_url.git",
+            "reference": "9d84710feab0f3d7c04c1e11dccef30ee350aad6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jakeasmith/http_build_url/zipball/9d84710feab0f3d7c04c1e11dccef30ee350aad6",
+            "reference": "9d84710feab0f3d7c04c1e11dccef30ee350aad6",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~3.7"
+        },
+        "time": "2014-11-17 16:24:50",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/http_build_url.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jake A. Smith",
+                "email": "theman@jakeasmith.com"
+            }
+        ],
+        "description": "Provides functionality for http_build_url() to environments without pecl_http."
+    },
+    {
         "name": "zendframework/zend-stdlib",
         "version": "2.4.0",
         "version_normalized": "2.4.0.0",
@@ -119,18 +157,18 @@
     },
     {
         "name": "varya/starbonus-widget-api",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "git@gitlab.kusmierz.be:varya/starbonus-widget-api.git",
-            "reference": "e03737be810250305a3ae8735b50ab35fe089f2b"
+            "reference": "2b9a4c6d83ccc9526e663bafcbad95cfda467b3c"
         },
         "require": {
             "lusitanian/oauth": "~0.3",
             "zendframework/zend-stdlib": "2.*"
         },
-        "time": "2015-04-09 10:26:27",
+        "time": "2015-04-29 10:10:15",
         "type": "project",
         "installation-source": "source",
         "autoload": {
@@ -152,43 +190,5 @@
             }
         ],
         "homepage": "http://www.starbonus.pl/"
-    },
-    {
-        "name": "jakeasmith/http_build_url",
-        "version": "0.1.5",
-        "version_normalized": "0.1.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jakeasmith/http_build_url.git",
-            "reference": "9d84710feab0f3d7c04c1e11dccef30ee350aad6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jakeasmith/http_build_url/zipball/9d84710feab0f3d7c04c1e11dccef30ee350aad6",
-            "reference": "9d84710feab0f3d7c04c1e11dccef30ee350aad6",
-            "shasum": ""
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~3.7"
-        },
-        "time": "2014-11-17 16:24:50",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/http_build_url.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jake A. Smith",
-                "email": "theman@jakeasmith.com"
-            }
-        ],
-        "description": "Provides functionality for http_build_url() to environments without pecl_http."
     }
 ]

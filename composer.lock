@@ -106,11 +106,11 @@
         },
         {
             "name": "varya/starbonus-widget-api",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.kusmierz.be:varya/starbonus-widget-api.git",
-                "reference": "e03737be810250305a3ae8735b50ab35fe089f2b"
+                "reference": "2b9a4c6d83ccc9526e663bafcbad95cfda467b3c"
             },
             "require": {
                 "lusitanian/oauth": "~0.3",
@@ -136,7 +136,7 @@
                 }
             ],
             "homepage": "http://www.starbonus.pl/",
-            "time": "2015-04-09 10:26:27"
+            "time": "2015-04-29 10:10:15"
         },
         {
             "name": "zendframework/zend-stdlib",
