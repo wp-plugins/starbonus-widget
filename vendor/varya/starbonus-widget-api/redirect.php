@@ -12,7 +12,7 @@
  * @var string $starbonusClickId
  *
  */
-$starbonusClickId = "{clickId}";
+$starbonusClickId = '{clickId}';
 
 /**
  * Optional - second parameter from query
@@ -21,7 +21,7 @@ $starbonusClickId = "{clickId}";
  *
  * @var string $starbonusUrlDomain
  */
-$starbonusUrlDomain = "{siteUrl}";
+$starbonusUrlDomain = 'http://www.example.com';
 
 /**
  * Cookie expiration days
@@ -30,24 +30,21 @@ $starbonusUrlDomain = "{siteUrl}";
  */
 $cookieExpire = 14;
 
-/**
- * Server name
- *
- * @var string $url
- */
-$url = $_SERVER['SERVER_NAME'];
+$url = $starbonusUrlDomain ?: '/';
 
-/**
- * During redirection $starbonusClickId could not be empty
- */
+// During redirection $starbonusClickId may not be empty
 if (!empty($starbonusClickId)) {
     setcookie('starbonus', $starbonusClickId, time() + 60 * 60 * 24 * $cookieExpire);
 
     $parsed = parse_url($url);
-    $relativeparts = array_intersect_key($parsed, array_flip(['path', 'query', 'fragment']));
+    $relativeparts = array_intersect_key($parsed, array_flip(array('path', 'query', 'fragment')));
 
     $url = http_build_url($relativeparts);
 
-    // Redirect to $url
-    header('Location', $url);
+    if (!empty($starbonusUrlDomain)) {
+        $url = rtrim($starbonusUrlDomain, '/') . '/' . ltrim($url, '/');
+    }
 }
+
+// Redirect to $url
+header('Location', $url);

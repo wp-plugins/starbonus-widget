@@ -5,7 +5,7 @@
  * Plugin URI: kontakt@starbonus.pl
  * Description: Starbonus widget.
  * Author: Varya
- * Version: 1.0.0
+ * Version: 1.0.2
  */
 
 if (!class_exists('StarBonusPlugin')) :
@@ -19,7 +19,7 @@ if (!class_exists('StarBonusPlugin')) :
         /**
          * @var StarBonusPlugin instance of the class
          */
-        protected static $instance = null;
+        static protected $instance = null;
 
         /**
          * @var string table_prefix
@@ -54,12 +54,6 @@ if (!class_exists('StarBonusPlugin')) :
             $this->includes();
             $this->init_hooks();
 
-            $schedules = array(
-                'minutely'     => array( 'interval' => MINUTE_IN_SECONDS,      'display' => __( 'Once Minutely' ) ),
-            );
-
-            array_merge( apply_filters( 'cron_schedules', array() ), $schedules );
-
             $this->table_name = $wpdb->prefix . 'starbonus_order_status_config';
         }
 
@@ -69,7 +63,7 @@ if (!class_exists('StarBonusPlugin')) :
         private function includes()
         {
             include_once('includes/class-sb-install.php');
-            require_once(__DIR__ . '/vendor/autoload.php');
+            require_once('vendor/autoload.php');
         }
 
         /**
@@ -150,16 +144,28 @@ if (!class_exists('StarBonusPlugin')) :
             if (get_option('starbonus_open_widget_ever') ||
                 (get_option('starbonus_open_widget_when_redirect') && $_COOKIE['starbonus_redirect'])
             ) {
-                echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js"></script>';
-                echo '<script>
+                echo '<script type="text/javascript">
+                        <!-- // <![CDATA[
+
                         var urlApi = "' . get_option('starbonus_url_api') . '",
                             urlJs = "' . get_option('starbonus_url_js') . '",
-                            programId = "' . get_option('starbonus_program_id') . '",
-                            source = "' . get_option('starbonus_source') . '";
+                            programId = ' . get_option('starbonus_program_id') . ',
+                            source = "' . get_option('starbonus_source') . '",
+                            cookieExpire = parseInt(' . (get_option('starbonus_cookie_expire') * 24 * 60 * 60) . ' || 2592000, 10);
 
-                        var starbonus_widget_config = {\'api\': {\'url\': urlApi },\'widget\': {\'program\': programId,\'source\': source}};
-                        require([urlJs]);
-                      </script>';
+                        (function(i,s,o,g,r,a,m){i[\'StarbonusWidgetObject\']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,\'script\',urlJs,\'_sbwidget\');
+
+                        _sbwidget(\'config\', {
+                            \'api\': {\'url\': urlApi},
+                            \'widget\': {\'program\': programId, \'source\': source},
+                            \'cookie\': {\'defaults\': {\'expires\': cookieExpire}}
+                        });
+
+                        // ]]> -->
+                    </script>';
             }
         }
 
@@ -186,7 +192,7 @@ if (!class_exists('StarBonusPlugin')) :
                         'SELECT * FROM ' . $this->table_name . ' WHERE order_id =  ' . $order->id . ' LIMIT 1'
                     );
                     if ($order_config && is_array($order_config) && (count($order_config) > 0)) {
-                        $order_config = $order_config[0];
+                        $order_config = reset($order_config);
                         if ($order_config->transaction_id) {
                             $transactionId = $order_config->transaction_id;
                         }
@@ -208,7 +214,6 @@ if (!class_exists('StarBonusPlugin')) :
          * @param int $transactionId
          *
          * @return bool
-         * @internal param bool $status
          */
         public function starbonus_widget_update_status_concrete($order, $isCompleted = false, $transactionId = null)
         {
@@ -311,7 +316,7 @@ if (!class_exists('StarBonusPlugin')) :
 
             $entity = new \Starbonus\Api\Entity\TransactionCashback();
             $entity
-                ->setTransaction($order->get_order_number())
+                ->setTransaction('wordpress-' . $order->get_order_number())
                 ->setClick($clickId)
                 ->setAmountPurchase(($order->get_total() - (get_option('starbonus_shipping_cost') ? $order->get_total_shipping() : 0)) * 100)
                 ->setCurrency($order->get_order_currency())
@@ -443,9 +448,11 @@ if (!class_exists('StarBonusPlugin')) :
             if ($result > 0) {
                 $order_config = $wpdb->get_results(
                     'SELECT * FROM ' . $this->table_name . ' WHERE order_id =  ' . $order->id . ' LIMIT 1'
-                )[0];
-
-                do_action('starbonus_widget_update_status', $order, false, $order_config->transaction_id);
+                );
+                if ($order_config && is_array($order_config) && count($order_config) > 0) {
+                    $order_config = reset($order_config);
+                    do_action('starbonus_widget_update_status', $order, false, $order_config->transaction_id);
+                }
             }
         }
 
@@ -566,7 +573,6 @@ if (!class_exists('StarBonusPlugin')) :
             if ($order_configs && is_array($order_configs) && count($order_configs) > 0) {
                 foreach ($order_configs as $order_config) {
                     $order = new \WC_Order($order_config->order_id);
-                    // przypadek 1.
                     $this->createTransactionCashback($order, $order_config->click_id);
                 }
             }
@@ -617,7 +623,7 @@ if (!class_exists('StarBonusPlugin')) :
         public function starbonus_menu_page()
         {
             add_menu_page('StarBonus', 'StarBonus', 'manage_options', 'starbonus-menu', [$this, 'starbonus_menu_main'],
-                plugins_url('/starbonus-widget-plugin-wp/assets/images/logo.png'));
+                plugins_url('/starbonus-widget/assets/images/logo.png'));
         }
 
         /**
@@ -755,8 +761,6 @@ if (!class_exists('StarBonusPlugin')) :
          * @param $clientId
          * @param $clientPassword
          * @param $programId
-         * @param $offerId
-         * @param $bonusId
          * @param $source
          * @param $cookieExpire
          * @param $openWidgetExpired
@@ -765,8 +769,6 @@ if (!class_exists('StarBonusPlugin')) :
             $clientId,
             $clientPassword,
             $programId,
-            $offerId,
-            $bonusId,
             $source,
             $cookieExpire,
             $openWidgetExpired
@@ -774,7 +776,7 @@ if (!class_exists('StarBonusPlugin')) :
             global $reg_errors;
             $reg_errors = new WP_Error();
 
-            if (empty($clientId) || empty($clientPassword) || empty($programId) || empty($offerId) || empty($bonusId) || empty($source) || empty($openWidgetExpired) || empty($cookieExpire)) {
+            if (empty($clientId) || empty($clientPassword) || empty($programId) || empty($source) || empty($openWidgetExpired) || empty($cookieExpire)) {
                 $reg_errors->add('field', 'Required form field is missing');
             }
 
@@ -819,7 +821,7 @@ if (!class_exists('StarBonusPlugin')) :
             global $clientId, $clientPassword, $programId, $offerId, $bonusId, $openWidgetEver, $cookieExpire, $urlApi, $urlJs, $orderTimestampLimit, $source, $shippingCost, $openWidgetExpired, $openWidgetWhenRedirect;
             if (isset($_POST['submit'])) {
                 $this->client_details_validation($_POST['client_id'], $_POST['client_password'], $_POST['program_id'],
-                    $_POST['offer_id'], $_POST['bonus_id'], $_POST['source'], $_POST['cookie_expire'],
+                    $_POST['source'], $_POST['cookie_expire'],
                     $_POST['open_widget_expired']);
 
                 $clientId = sanitize_text_field($_POST['client_id']);
@@ -904,9 +906,9 @@ if (!class_exists('StarBonusPlugin')) :
         {
             if (!empty($wp->query_vars['starbonus_click_id'])) {
                 setcookie('starbonus', $wp->query_vars['starbonus_click_id'],
-                    time() + 60 * 60 * 24 * get_option('starbonus_cookie_expire'), '/');
+                    time() + (60 * 60 * 24 * get_option('starbonus_cookie_expire')), '/');
                 setcookie('starbonus_redirect', 1,
-                    time() + 60 * 60 * 24 * get_option('starbonus_open_widget_expired'), '/');
+                    time() + (60 * 60 * 24 * get_option('starbonus_open_widget_expired')), '/');
 
                 $url = home_url();
 

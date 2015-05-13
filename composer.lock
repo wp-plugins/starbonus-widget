@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3b73b98667c084face276a6b654066d",
+    "hash": "7c4522677f496c0b2d7a5db828936f4a",
     "packages": [
         {
             "name": "jakeasmith/http_build_url",
@@ -106,11 +106,11 @@
         },
         {
             "name": "varya/starbonus-widget-api",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.kusmierz.be:varya/starbonus-widget-api.git",
-                "reference": "13f5f22abdbb2f64722162cf2104678ad917ce07"
+                "reference": "2b9a4c6d83ccc9526e663bafcbad95cfda467b3c"
             },
             "require": {
                 "lusitanian/oauth": "~0.3",
@@ -136,21 +136,20 @@
                 }
             ],
             "homepage": "http://www.starbonus.pl/",
-            "time": "2015-04-01 12:51:14"
+            "time": "2015-04-29 10:10:15"
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "2.3.7",
-            "target-dir": "Zend/Stdlib",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendStdlib.git",
-                "reference": "3f6e2416183d4879a983680e1165f14164b262f4"
+                "reference": "eab586f4c18af3fa63c977611939f1f4a3cf1030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/3f6e2416183d4879a983680e1165f14164b262f4",
-                "reference": "3f6e2416183d4879a983680e1165f14164b262f4",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/eab586f4c18af3fa63c977611939f1f4a3cf1030",
+                "reference": "eab586f4c18af3fa63c977611939f1f4a3cf1030",
                 "shasum": ""
             },
             "require": {
@@ -176,7 +175,7 @@
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Zend\\Stdlib\\": ""
                 }
             },
@@ -189,15 +188,13 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2015-03-12 16:55:53"
+            "time": "2015-04-01 18:09:29"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "varya/starbonus-widget-api": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

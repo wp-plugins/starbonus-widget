@@ -6,7 +6,7 @@ use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\UriInterface;
 
 /**
- * Client implementation for streams/file_get_contents
+ * Client implementation for streams/file_get_contents (with some api errors)
  */
 class Stream2Client extends StreamClient
 {
@@ -15,9 +15,9 @@ class Stream2Client extends StreamClient
      * They should return, in string form, the response body and throw an exception on error.
      *
      * @param UriInterface $endpoint
-     * @param mixed        $requestBody
-     * @param array        $extraHeaders
-     * @param string       $method
+     * @param mixed $requestBody
+     * @param array $extraHeaders
+     * @param string $method
      *
      * @return string
      *
@@ -43,22 +43,23 @@ class Stream2Client extends StreamClient
             $extraHeaders['Content-Type'] = 'Content-Type: application/x-www-form-urlencoded';
         }
 
-        $host = 'Host: '.$endpoint->getHost();
+        $host = 'Host: ' . $endpoint->getHost();
         // Append port to Host if it has been specified
         if ($endpoint->hasExplicitPortSpecified()) {
-            $host .= ':'.$endpoint->getPort();
+            $host .= ':' . $endpoint->getPort();
         }
 
-        $extraHeaders['Host']       = $host;
+        $extraHeaders['Host'] = $host;
         $extraHeaders['Connection'] = 'Connection: close';
 
         if (is_array($requestBody)) {
             $requestBody = http_build_query($requestBody, '', '&');
         }
-        $extraHeaders['Content-length'] = 'Content-length: '.strlen($requestBody);
+        $extraHeaders['Content-length'] = 'Content-length: ' . strlen($requestBody);
 
         $context = $this->generateStreamContext($requestBody, $extraHeaders, $method);
 
+        $firstError = error_get_last();
         $level = error_reporting(0);
 
         $stream = fopen($endpoint->getAbsoluteUri(), 'r', false, $context);
@@ -90,26 +91,32 @@ class Stream2Client extends StreamClient
             }
         }
 
-        if (!empty($lastError) && is_array($lastError)) {
+        if ($firstError !== $lastError && !empty($lastError) && is_array($lastError)) {
             throw new TokenResponseException($lastError['message']);
         }
 
         return $response;
     }
 
-    private function generateStreamContext($body, $headers, $method)
+    /**
+     * @param string $body
+     * @param array $headers
+     * @param string $method
+     * @return resource
+     */
+    private function generateStreamContext($body, array $headers = array(), $method = 'GET')
     {
         return stream_context_create(
             array(
                 'http' => array(
-                    'method'           => $method,
-                    'header'           => implode("\r\n", array_values($headers)),
-                    'content'          => $body,
+                    'method' => $method,
+                    'header' => implode("\r\n", array_values($headers)),
+                    'content' => $body,
                     'protocol_version' => '1.1',
-                    'user_agent'       => $this->userAgent,
-                    'max_redirects'    => $this->maxRedirects,
-                    'timeout'          => $this->timeout,
-                    'ignore_errors'    => true,
+                    'user_agent' => $this->userAgent,
+                    'max_redirects' => $this->maxRedirects,
+                    'timeout' => $this->timeout,
+                    'ignore_errors' => true,
                 ),
             )
         );

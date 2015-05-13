@@ -1,5 +1,5 @@
 {
-    "name": "varya/starbonus-widget-plugin-wp",
+    "name": "varya/widget",
     "description": "",
     "version": "1.0.0",
     "homepage": "http://www.starbonus.pl/",
@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "varya/starbonus-widget-api": "dev-master",
+        "varya/starbonus-widget-api": "~1.0",
         "jakeasmith/http_build_url": "~0.1.5"
     }
 }
