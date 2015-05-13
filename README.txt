@@ -42,3 +42,7 @@ Pierwsza wersja pluginu StarBonus Widget
 = 1.0.1 =
 Poprawa panelu administracji
 Ustawienei cyklu życia ciasteczka
+
+= 1.0.2 =
+Drobne poprawki funkcjonalności
+Zmiana działania skryptu widgetu
