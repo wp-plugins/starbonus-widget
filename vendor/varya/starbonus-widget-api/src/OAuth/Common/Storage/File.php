@@ -41,9 +41,11 @@ class File implements TokenStorageInterface
 
     /**
      * Constructor
-     * @param string|null $dir
+     *
+     * @param string|null $dir By default it's temporary directory
+     * @param string|null $prefix User prefix
      */
-    public function __construct($dir = null)
+    public function __construct($dir = null, $prefix = null)
     {
         if (empty($dir)) {
             $dir = sys_get_temp_dir();
@@ -52,6 +54,15 @@ class File implements TokenStorageInterface
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
+
+        $prefix = preg_replace('/[^a-z0-9_-]/i', '', strval($prefix));
+
+        if (empty($prefix)) {
+            $prefix = sha1(__DIR__);
+        }
+
+        $this->filenamePrefix .= $prefix . '_';
+        $this->filenameStatePrefix .= $prefix . '_';
 
         $this->directory = rtrim($dir, '\\/') . DIRECTORY_SEPARATOR;
 

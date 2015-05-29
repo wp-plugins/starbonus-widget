@@ -3,12 +3,14 @@
 /**
  * Class SB_Install
  */
-abstract class SB_Install {
+abstract class SB_Install
+{
 
     /**
      * Create table for order status manage during install or enable plugin
      */
-    public static function install() {
+    public static function install()
+    {
         self::create_table();
         self::create_options();
     }
@@ -16,7 +18,8 @@ abstract class SB_Install {
     /**
      * Creating StarBonus config table
      */
-    public static function create_table() {
+    public static function create_table()
+    {
         global $wpdb;
         $table_name = $wpdb->prefix . 'starbonus_order_status_config';
 
@@ -49,36 +52,40 @@ abstract class SB_Install {
     /**
      * Creating default options
      */
-    public static function create_options() {
+    public static function create_options()
+    {
         /**
          * Creating default options
          */
         if ( ! get_option( 'starbonus_order_timestamp_limit' ) ) {
-            add_option( 'starbonus_order_timestamp_limit', 14 );
+            add_option( 'starbonus_order_timestamp_limit', 15 );
         }
-        if ( ! get_option( 'starbonus_open_widget_ever' ) ) {
-            add_option( 'starbonus_open_widget_ever', true );
-        }
-        if ( ! get_option( 'starbonus_cookie_expire' ) ) {
-            add_option( 'starbonus_cookie_expire', 30 );
-        }
-        if ( ! get_option( 'starbonus_source' ) ) {
-            add_option( 'starbonus_source', 'sklep' );
+        if ( ! get_option( 'starbonus_open_widget' ) ) {
+            add_option( 'starbonus_open_widget', 'ever' );
         }
         if ( ! get_option( 'starbonus_url_api' ) ) {
-            add_option( 'starbonus_url_api', 'https://api.starbonus.pl' );
-        }
-        if ( ! get_option( 'starbonus_url_js' ) ) {
-            add_option( 'starbonus_url_js', 'https://www.starbonus.pl/widget/build/widget.js' );
+            add_option( 'starbonus_url_api', 'production' );
         }
         if ( ! get_option( 'starbonus_shipping_cost' ) ) {
             add_option( 'starbonus_shipping_cost', true );
         }
-        if ( ! get_option( 'starbonus_open_widget_expired' ) ) {
-            add_option( 'starbonus_open_widget_expired', 7 );
+        if ( ! get_option( 'starbonus_expanded' ) ) {
+            add_option( 'starbonus_expanded', true );
         }
-        if ( ! get_option( 'starbonus_open_widget_when_redirect' ) ) {
-            add_option( 'starbonus_open_widget_when_redirect', true );
+        if ( ! get_option( 'starbonus_min_width' ) ) {
+            add_option( 'starbonus_min_width', 600 );
+        }
+        if ( ! get_option( 'starbonus_widget_below' ) ) {
+            add_option( 'starbonus_widget_below', 150 );
+        }
+        if ( ! get_option( 'starbonus_widget_side' ) ) {
+            add_option( 'starbonus_widget_side', 'left' );
+        }
+        if ( ! get_option( 'starbonus_skin' ) ) {
+            add_option( 'starbonus_skin', 'violet' );
+        }
+        if ( ! get_option( 'starbonus_animation' ) ) {
+            add_option( 'starbonus_animation', true );
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Starbonus\Api;
 
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\Stream2Client;
+use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Service\ServiceInterface;
 use OAuth\Common\Storage\File;
@@ -24,6 +25,11 @@ class Api
      * @var string
      */
     protected $serviceName = 'Starbonus';
+
+    /**
+     * @var string
+     */
+    protected $apiDefaultHost = 'https://api.starbonus.pl';
 
     /**
      * @var \OAuth\Common\Service\ServiceInterface
@@ -58,6 +64,10 @@ class Api
     {
         $this->credentials = $credentials;
         $this->baseApiUri = $baseApiUri;
+
+        if (is_null($this->baseApiUri)) {
+            $this->baseApiUri = new Uri($this->apiDefaultHost);
+        }
     }
 
     /**
@@ -130,7 +140,8 @@ class Api
     public function getStorage()
     {
         if (empty($this->storage)) {
-            $this->storage = new File();
+            $prefix = sha1($this->serviceName . '_' . $this->credentials->getConsumerId() . '_' . $this->baseApiUri->getAbsoluteUri());
+            $this->storage = new File(null, $prefix);
         }
 
         return $this->storage;

@@ -6,7 +6,6 @@ use BadMethodCallException;
 use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
-use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\OAuth2\Token\StdOAuth2Token;
@@ -19,11 +18,6 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
  */
 class Starbonus extends AbstractService
 {
-
-    /**
-     * @var string
-     */
-    protected $host = 'http://api.starbonus.pl';
 
     /**
      * Scope to access transaction cashbacks
@@ -46,10 +40,6 @@ class Starbonus extends AbstractService
         UriInterface $baseApiUri = null
     ) {
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
-
-        if (null === $baseApiUri) {
-            $this->baseApiUri = new Uri($this->host);
-        }
     }
 
     /**

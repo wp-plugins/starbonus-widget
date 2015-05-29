@@ -64,6 +64,10 @@ class Stream2Client extends StreamClient
 
         $stream = fopen($endpoint->getAbsoluteUri(), 'r', false, $context);
 
+        if (!is_resource($stream)) {
+            throw new TokenResponseException('Failed to open endpoint.');
+        }
+
         // header information as well as meta data
         // about the stream
         $response_metadata = stream_get_meta_data($stream);
@@ -75,12 +79,15 @@ class Stream2Client extends StreamClient
         error_reporting($level);
 
         $lastError = error_get_last();
-        if (
-            empty($response) || !is_array($response_metadata) ||
-            !empty($response_metadata['timed_out']) ||
+
+        if (empty($response) || !is_array($response_metadata)) {
+            throw new TokenResponseException('Failed to request resource.');
+        }
+
+        if (!empty($response_metadata['timed_out']) ||
             !empty($response_metadata['eof'])
         ) {
-            throw new TokenResponseException('Failed to request resource.');
+            throw new TokenResponseException('Failed to request resource (timeout or EOF).');
         }
 
         if (!empty($response_metadata['wrapper_data']) && is_array($response_metadata['wrapper_data'])) {
@@ -117,6 +124,7 @@ class Stream2Client extends StreamClient
                     'max_redirects' => $this->maxRedirects,
                     'timeout' => $this->timeout,
                     'ignore_errors' => true,
+                    'follow_location' => false,
                 ),
             )
         );
