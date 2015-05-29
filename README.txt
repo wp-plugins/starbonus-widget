@@ -13,8 +13,8 @@ Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu.
 Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu. Aktywność klienta — konieczna do naliczenia Cashbacku — ogranicza się do podania adresu e-mail, a proces zakupowy przebiega bez zmian. Wypłata Cashbacku realizowana jest na starbonus.pl, poza systemem sklepu.
 
 = KORZYŚCI Z INSTALACJI: =
-* lojalizacja Klientów — tak działa Cashback; Klient chętniej wróci, bo nagradzasz go kasą;
-* wzrost wartości koszyka — tak działa Bonus; motywujesz do wydania większej kwoty;
+* lojalizacja Klientów — tak działa Cashback; Klient chętniej wróci, bo nagradzasz go kasą
+* wzrost wartości koszyka — tak działa Bonus; motywujesz do wydania większej kwoty
 * nowi Klienci — tak działa Program StarBonus jako całość; Klienci z pozostałych sklepów przyjdą do Ciebie.
 
 = PRZYJAZNA TECHNOLOGIA: =
@@ -47,17 +47,18 @@ kontakt@starbonus.pl
 3. Tak wygląda zminimalizowany widget StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
-= 1.0.0 =
-* Pierwsza wersja pluginu StarBonus Widget
 
-= 1.0.1 =
-* Poprawa panelu administracji
-* Ustawienei cyklu życia ciasteczka
+= 1.0.3 =
+* Dodatkowe funkcjonalości w panelu administracyjnym
+* Poprawa funkcjolaności
 
 = 1.0.2 =
 * Drobne poprawki funkcjonalności
 * Zmiana działania skryptu widgetu
 
-= 1.0.3 =
-* Dodatkowe funkcjonalości w panelu administracyjnym
-* Poprawa funkcjolaności
+= 1.0.1 =
+* Poprawa panelu administracji
+* Ustawienei cyklu życia ciasteczka
+
+= 1.0.0 =
+* Pierwsza wersja pluginu StarBonus Widget
