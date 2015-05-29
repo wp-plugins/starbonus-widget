@@ -955,7 +955,7 @@ if ( ! class_exists( 'StarBonusPlugin' ) ) :
                 $starbonusWidgetUri = new \OAuth\Common\Http\Uri\Uri( ( get_option( 'starbonus_url_api' ) === 'production' ? 'https://api.starbonus.pl' : 'http://api.starbonus.kusmierz.be' ) );
                 $this->starbonusApi = new \Starbonus\Api\Api( $credentials, $starbonusWidgetUri );
                 // production
-                // $starbonusApi = new \Starbonus\Api\Api($credentials);
+//                 $this->starbonusApi = new \Starbonus\Api\Api($credentials);
             }
 
             return $this->starbonusApi;
