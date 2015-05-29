@@ -13,13 +13,13 @@ Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu.
 Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu. Aktywność klienta — konieczna do naliczenia Cashbacku — ogranicza się do podania adresu e-mail, a proces zakupowy przebiega bez zmian. Wypłata Cashbacku realizowana jest na starbonus.pl, poza systemem sklepu.
 
 = KORZYŚCI Z INSTALACJI: =
-* lojalizacja Klientów — tak działa Cashback; Klient chętniej wróci, bo nagradzasz go kasą
-* wzrost wartości koszyka — tak działa Bonus; motywujesz do wydania większej kwoty
-* nowi Klienci — tak działa Program StarBonus jako całość; Klienci z pozostałych sklepów przyjdą do Ciebie.
+* lojalizacja Klientów — tak działa Cashback, Klient chętniej wróci, bo nagradzasz go kasą
+* wzrost wartości koszyka — tak działa Bonus, motywujesz do wydania większej kwoty
+* nowi Klienci — tak działa Program StarBonus jako całość, Klienci z pozostałych sklepów przyjdą do Ciebie
 
 = PRZYJAZNA TECHNOLOGIA: =
-skórki pozwolą dostosować Wtyczkę do wyglądu sklepu;
-instalacja bez pomocy IT.
+* skórki pozwolą dostosować Wtyczkę do wyglądu sklepu
+* instalacja bez pomocy IT.
 
 Masz pytania? Chętnie pomożemy.
 kontakt@starbonus.pl
