@@ -5,7 +5,7 @@
  * Plugin URI: kontakt@starbonus.pl
  * Description: Starbonus widget.
  * Author: Varya
- * Version: 1.0.3
+ * Version: 1.0.4
  */
 
 if ( ! class_exists( 'StarBonusPlugin' ) ) :
@@ -146,12 +146,12 @@ if ( ! class_exists( 'StarBonusPlugin' ) ) :
                             programId = ' . get_option( 'starbonus_program_id' ) . ',
                             bonusId = "' . get_option( 'starbonus_bonus_id' ) . '",
                             source = "' . get_option( 'starbonus_source' ) . '",
-                            isExpanded = ' . ( get_option( 'starbonus_expanded' ) ? true : false ) . ',
+                            isExpanded = ' . ( get_option( 'starbonus_expanded' ) ? 1 : 0 ) . ',
                             minWidth = ' . ( get_option( 'starbonus_min_width' ) ?: 600 ) . ',
                             fromTop = ' . ( get_option( 'starbonus_widget_below' ) ?: 150 ) . ',
                             orientation = "' . ( get_option( 'starbonus_widget_side' ) ? : 'left' ) . '",
                             color = "' . ( get_option( 'starbonus_skin' ) ?: null ) . '",
-                            animation = ' . ( get_option( 'starbonus_animation' ) ? true : false ) . ';
+                            animation = ' . ( get_option( 'starbonus_animation' ) ? 1 : 0 ) . ';
 
 
                         (function(i,s,o,g,r,a,m){i[\'StarbonusWidgetObject\']=r;i[r]=i[r]||function(){
