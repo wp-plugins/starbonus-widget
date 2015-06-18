@@ -3,7 +3,7 @@ Contributors: Varya
 Tags: starbonus, widget, cashback
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,7 @@ Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu. Aktywno
 Masz pytania? Chętnie pomożemy.
 kontakt@starbonus.pl
 
-== Installation ==
+== Installation == 
 
 = Z panelu administratora =
 1. Przejdź do 'Plugins > Add New'
@@ -50,6 +50,9 @@ kontakt@starbonus.pl
 3. Tak wygląda zminimalizowany widget StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
+
+= 1.0.5 =
+* Naprawiony błąd wyświetlania widgetu na urządzeniach mobilnych
 
 = 1.0.4 =
 * Poprawione interpretowanie watrości boolean

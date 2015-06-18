@@ -5,7 +5,7 @@
  * Plugin URI: kontakt@starbonus.pl
  * Description: Starbonus widget.
  * Author: Varya
- * Version: 1.0.4
+ * Version: 1.0.5
  */
 
 if ( ! class_exists( 'StarBonusPlugin' ) ) :
@@ -140,30 +140,32 @@ if ( ! class_exists( 'StarBonusPlugin' ) ) :
             if ( get_option( 'starbonus_open_widget' ) === 'ever' || ( get_option( 'starbonus_open_widget' ) === 'redirect' && $_COOKIE['starbonus_redirect'] ) ) {
                 echo '<script type="text/javascript">
                         <!-- // <![CDATA[
+                        ;(function () {
+                            var urlApi = "' . ( get_option( 'starbonus_url_api' ) === 'production' ? 'https://api.starbonus.pl' : 'http://api.starbonus.kusmierz.be' ) . '",
+                                urlJs = "' . ( get_option( 'starbonus_url_api' ) === 'production' ? 'https://static.starbonus.pl/widget/build/widget.min.js?v=1.1.2' : 'http://starbonus.kusmierz.be/widget/build/widget.min.js' ) . '",
+                                programId = ' . get_option( 'starbonus_program_id' ) . ',
+                                bonusId = "' . get_option( 'starbonus_bonus_id' ) . '",
+                                source = "' . get_option( 'starbonus_source' ) . '",
+                                isExpanded = ' . ( get_option( 'starbonus_expanded' ) ? 1 : 0 ) . ',
+                                minWidth = ' . ( get_option( 'starbonus_min_width' ) ?: 600 ) . ',
+                                fromTop = ' . ( get_option( 'starbonus_widget_below' ) ?: 150 ) . ',
+                                orientation = "' . ( get_option( 'starbonus_widget_side' ) ? : 'left' ) . '",
+                                color = "' . ( get_option( 'starbonus_skin' ) ?: null ) . '",
+                                animation = ' . ( get_option( 'starbonus_animation' ) ? 1 : 0 ) . ';
 
-                        var urlApi = "' . ( get_option( 'starbonus_url_api' ) === 'production' ? 'https://api.starbonus.pl' : 'http://api.starbonus.kusmierz.be' ) . '",
-                            urlJs = "' . ( get_option( 'starbonus_url_api' ) === 'production' ? 'https://static.starbonus.pl/widget/build/widget.min.js?v=1.1.2' : 'http://starbonus.kusmierz.be/widget/build/widget.min.js' ) . '",
-                            programId = ' . get_option( 'starbonus_program_id' ) . ',
-                            bonusId = "' . get_option( 'starbonus_bonus_id' ) . '",
-                            source = "' . get_option( 'starbonus_source' ) . '",
-                            isExpanded = ' . ( get_option( 'starbonus_expanded' ) ? 1 : 0 ) . ',
-                            minWidth = ' . ( get_option( 'starbonus_min_width' ) ?: 600 ) . ',
-                            fromTop = ' . ( get_option( 'starbonus_widget_below' ) ?: 150 ) . ',
-                            orientation = "' . ( get_option( 'starbonus_widget_side' ) ? : 'left' ) . '",
-                            color = "' . ( get_option( 'starbonus_skin' ) ?: null ) . '",
-                            animation = ' . ( get_option( 'starbonus_animation' ) ? 1 : 0 ) . ';
 
+                            (function(i,s,o,g,r,a,m){i[\'StarbonusWidgetObject\']=r;i[r]=i[r]||function(){
+                                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                            })(window,document,\'script\',urlJs,\'_sbwidget\');
 
-                        (function(i,s,o,g,r,a,m){i[\'StarbonusWidgetObject\']=r;i[r]=i[r]||function(){
-                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                        })(window,document,\'script\',urlJs,\'_sbwidget\');
+                            _sbwidget(\'config\', {
+                                \'api\': {\'url\': urlApi},
+                                \'widget\': {\'settings\': {\'isExpanded\': isExpanded}, \'program\': programId, \'bonus\': bonusId, \'source\': source, \'minWidth\': minWidth, \'fromTop\': fromTop, \'orientation\': orientation, \'color\': color, \'animations\': animation}
+                            });
+                            _sbwidget(\'show\');
+                        })();
 
-                        _sbwidget(\'config\', {
-                            \'api\': {\'url\': urlApi},
-                            \'widget\': {\'settings\': {\'isExpanded\': isExpanded}, \'program\': programId, \'bonus\': bonusId, \'source\': source, \'minWidth\': minWidth, \'fromTop\': fromTop, \'orientation\': orientation, \'color\': color, \'animations\': animation}
-                        });
-                        _sbwidget(\'show\');
                         // ]]> -->
                     </script>';
             }
