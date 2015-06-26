@@ -155,8 +155,8 @@ if (!class_exists('StarBonusPlugin')) :
         {
             if (get_option('starbonus_open_widget') === 'ever' || (get_option('starbonus_open_widget') === 'redirect' && $_COOKIE['starbonus_redirect'])) {
 
-                if (get_option('starbonus_show_on_shop') && function_exists('is_shop') && function_exists('is_cart') && function_exists('is_checkout') && function_exists('is_product') && function_exists('is_product_taxonomy') && function_exists('is_product_category') && function_exists('is_checkout_pay_page') && function_exists('is_add_payment_method_page')) {
-                    if (is_shop() || is_cart() || is_checkout() || is_product() || is_product_taxonomy() || is_product_category() || is_checkout_pay_page() || is_add_payment_method_page()) {
+                if (get_option('starbonus_show_on_shop') && function_exists('is_shop') && function_exists('is_cart')) {
+                    if (is_account_page() || is_account_page() || is_view_order_page() || is_order_received_page() || is_shop() || is_cart() || is_checkout() || is_product() || is_product_taxonomy() || is_product_category() || is_checkout_pay_page() || is_add_payment_method_page()) {
                         $this->showScript();
                     }
                 } else {
