@@ -87,5 +87,8 @@ abstract class SB_Install
         if ( ! get_option( 'starbonus_animation' ) ) {
             add_option( 'starbonus_animation', true );
         }
+        if ( ! get_option( 'starbonus_show_on_shop' ) ) {
+            add_option( 'starbonus_show_on_shop', false );
+        }
     }
 }
