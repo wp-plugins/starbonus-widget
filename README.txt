@@ -47,7 +47,8 @@ W przypadku używania pluginów typu 'Cache' należy pamiętać, aby po właczen
 == Screenshots ==
 1. Logowanie do serwisu StarBonus jest niezwykle proste dzięki wtyczce.
 2. Po zalogowaniu otrzymujemy dostęp do serwisu StarBonus. Wtyczkę można już zminimalizować.
-3. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
+3. Wtyczka po zwinięciu zajmuje bardzo mało miejsca.
+4. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
 
