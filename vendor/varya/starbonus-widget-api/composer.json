@@ -1,0 +1,31 @@
+{
+  "name": "varya/starbonus-widget-api",
+  "description": "",
+  "version": "1.0.5",
+  "type": "project",
+  "license": "proprietary",
+  "keywords": [],
+  "homepage": "http://www.starbonus.pl/",
+  "authors": [
+    {
+      "name": "Varya",
+      "email": "kontakt@varya.pro",
+      "homepage": "http://www.varya.pro/",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "files": [],
+    "psr-4": {
+      "OAuth\\": "src/",
+      "Starbonus\\": "src/"
+    }
+  },
+  "require": {
+    "lusitanian/oauth": "~0.3",
+    "zendframework/zend-stdlib": "2.*"
+  }
+}
