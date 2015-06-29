@@ -4,7 +4,6 @@ Tags: starbonus, widget, wtyczka, cashback
 Requires at least: 4.0
 Tested up to: 4.2.2
 Stable tag: 1.0.7
-Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,9 +13,9 @@ Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu.
 Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu. Aktywność klienta — konieczna do naliczenia Cashbacku — ogranicza się do podania adresu e-mail, a proces zakupowy przebiega bez zmian. Wypłata Cashbacku realizowana jest na starbonus.pl, poza systemem sklepu.
 
 = KORZYŚCI Z INSTALACJI: =
-* lojalizacja Klientów — tak działa Cashback; Klient chętniej wróci, bo nagradzasz go kasą;
+* lojalizacja Klientów — tak działa Cashback; Klient chętniej wróci, bo nagradzasz go kasą;
 * wzrost wartości koszyka — tak działa Bonus; motywujesz do wydania większej kwoty;
-* nowi Klienci — tak działa Program StarBonus jako całość; Klienci z pozostałych sklepów przyjdą do Ciebie.
+* nowi Klienci — tak działa Program StarBonus jako całość; Klienci z pozostałych sklepów przyjdą do Ciebie.
 
 = PRZYJAZNA TECHNOLOGIA: =
 skórki pozwolą dostosować Wtyczkę do wyglądu sklepu;
@@ -48,7 +47,8 @@ W przypadku używania pluginów typu 'Cache' należy pamiętać, aby po właczen
 == Screenshots ==
 1. Logowanie do serwisu StarBonus jest niezwykle proste dzięki wtyczce.
 2. Po zalogowaniu otrzymujemy dostęp do serwisu StarBonus. Wtyczkę można już zminimalizować.
-3. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
+3. Wtyczka po zwinięciu zajmuje bardzo mało miejsca.
+4. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
 
