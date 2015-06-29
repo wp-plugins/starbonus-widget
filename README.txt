@@ -1,12 +1,11 @@
-=== StarBonus Widget ===
-Contributors: Varya
-Tags: starbonus, widget, cashback
+=== Wtyczka StarBonus ===
+Contributors: StarBonus Sp. z o.o.
+Tags: starbonus, widget, wtyczka, cashback
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.0.6
-Stable tag: trunk
+Stable tag: 1.0.7
 License: GPLv2 or later
-License URI: URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Zasadniczą funkcją Wtyczki jest naliczenie Cashbacku klientowi sklepu.
 
@@ -29,31 +28,38 @@ kontakt@starbonus.pl
 == Installation ==
 = Z panelu administratora =
 1. Przejdź do 'Plugins > Add New'
-2. Znajdź 'Starbonus Widget'
-3. Aktywuj plugin Starbonus Widget
+2. Znajdź 'Wtyczka StarBonus'
+3. Aktywuj plugin 'Wtyczka StarBonus'
 
 = Ze strony WordPress.org =
-1. Pobierz plugin 'StarBonus Widget'
+1. Pobierz plugin 'Wtyczka StarBonus'
 2. Wgraj na serwer paczkę zip z panelu administratora lub zawartość paczki skopiuj do twojego katalogu '/wp-content/plugins/'
-3. Aktywuj plugin Starbonus Widget
+3. Aktywuj plugin 'Wtyczka Starbonus'
 
 = Konfiguracja =
 1. Przejdź do zakładki zarządzania pluginem
 2. Uzupełnij dane dotyczące Twojego sklepu (jeśli ich nie posiadasz zgłoś się do administracji na contact@starbonus.pl)
 
+== Frequently Asked Questions ==
+= Cache =
+W przypadku używania pluginów typu 'Cache' należy pamiętać, aby po właczeniu lub zmianie ustawień wtyczki StarBonus wyczyścić dokładnie cały cache.
 
 == Screenshots ==
-1. Logowanie do serwisu StarBonus jest niezwykle proste dzięki widgetowi.
-2. Po zalogowaniu otrzymujemy dostęp do serwisu StarBonus. Widget można już zminimalizować.
-3. Tak wygląda zminimalizowany widget StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
+1. Logowanie do serwisu StarBonus jest niezwykle proste dzięki wtyczce.
+2. Po zalogowaniu otrzymujemy dostęp do serwisu StarBonus. Wtyczkę można już zminimalizować.
+3. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępny jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
 
+= 1.0.7 =
+* Wewnętrzne zmiany funkcjonalności
+* Poprawa dokumentacji
+
 = 1.0.6 =
-* Możliwosć pokazywania widgetu tylko na stronie sklepu
+* Możliwosć pokazywania wtyczki tylko na stronie sklepu
 
 = 1.0.5 =
-* Naprawiony błąd wyświetlania widgetu na urządzeniach mobilnych
+* Naprawiony błąd wyświetlania wtyczki na urządzeniach mobilnych
 
 = 1.0.4 =
 * Poprawione interpretowanie watrości boolean
@@ -64,11 +70,11 @@ kontakt@starbonus.pl
 
 = 1.0.2 =
 * Drobne poprawki funkcjonalności
-* Zmiana działania skryptu widgetu
+* Zmiana działania skryptu wtyczki
 
 = 1.0.1 =
 * Poprawa panelu administracji
 * Ustawienei cyklu życia ciasteczka
 
 = 1.0.0 =
-* Pierwsza wersja pluginu StarBonus Widget
+* Pierwsza wersja pluginu Wtyczka StarBonus

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name: Starbonus Widget
+ * Plugin Name: Wtyczka StarBonus
  * Plugin URI: kontakt@starbonus.pl
- * Description: Starbonus widget.
- * Author: Varya
- * Version: 1.0.6
+ * Description: Wtyczka StarBonus.
+ * Author: StarBonus Sp. z o.o.
+ * Version: 1.0.7
  */
 
 if (!class_exists('StarBonusPlugin')) :
@@ -650,7 +650,6 @@ if (!class_exists('StarBonusPlugin')) :
          * Client html form
          *
          * @param $clientId
-         * @param $clientPassword
          * @param $programId
          * @param $bonusId
          * @param $source
@@ -660,10 +659,11 @@ if (!class_exists('StarBonusPlugin')) :
          * @param $minWidth
          * @param $widgetBelow
          * @param $animation
+         * @param $showOnShop
+         *
          */
         public function client_details_form(
             $clientId,
-            $clientPassword,
             $programId,
             $bonusId,
             $source,
@@ -705,9 +705,8 @@ if (!class_exists('StarBonusPlugin')) :
 					    <br/>
 					    <div>
 						    <label for="client_password"><strong>Hasło Partnera<i style="color:red">*</i></strong></label>
-						    <input type="text" placeholder="np. TajneHaslo123" style="width:99%" name="client_password" value="' . (isset($_POST['client_password'])
-                    ? $clientPassword
-                    : (get_option('starbonus_client_password') ? get_option('starbonus_client_password') : null)) . '" size="40" aria-required="true">
+						    <input type="password" placeholder="np. TajneHaslo123" style="width:99%" name="client_password" value="' . (get_option('starbonus_client_password')
+                    ? '******' : '') . '" size="40" aria-required="true">
 					    	<span class="description"><small>indywidualne hasło zabezpieczające</small></span>
 					        <span title="dostaniesz go e-mailem od StarBonus po podpisaniu umowy" style="cursor:pointer"> (?)</span>
 					    </div>
@@ -746,7 +745,7 @@ if (!class_exists('StarBonusPlugin')) :
 					    </div>
 					    <br/>
 					    <div>
-						    <label for="shipping_cost" style="line-height:40px"><strong>Wlicz koszt przesyłki do kwoty Transakcji [T/N]</strong></label>
+						    <label for="shipping_cost" style="line-height:40px"><strong>Wlicz koszt przesyłki do kwoty Transakcji</strong></label>
 						    <input type="checkbox" name="shipping_cost" ' . (((isset($_POST['shipping_cost']) && $shippingCost) || (!isset($_POST['shipping_cost']) && get_option('starbonus_shipping_cost')))
                     ? 'checked="checked"'
                     : (get_option('starbonus_shipping_cost') ? get_option('starbonus_shipping_cost') : false)) . '>
@@ -767,11 +766,11 @@ if (!class_exists('StarBonusPlugin')) :
 					    </div>
 					    <br/>
 					    <div>
-						    <label for="show_on_shop" style="line-height:40px"><strong>Pokazuj widget tylko w sklepie</strong></label>
+						    <label for="show_on_shop" style="line-height:40px"><strong>Widoczna tylko w sklepie</strong></label>
 						    <input id="show_on_shop" type="checkbox" name="show_on_shop" ' . (((isset($_POST['show_on_shop']) && $showOnShop) || (!isset($_POST['show_on_shop']) && get_option('starbonus_show_on_shop')))
                     ? 'checked="checked"'
                     : (get_option('starbonus_show_on_shop') ? get_option('starbonus_show_on_shop') : false)) . '>
-					        <br/><span class="description"><small>Pokazuj wtyczkę tylko na stronie sklepu</small></span>
+					        <br/><span class="description"><small>ogranicza widoczność tylko do podstron związanych bezpośrednio z zakupem</small></span>
 					    </div>
 					    <br/>
 					    <div>
@@ -786,7 +785,7 @@ if (!class_exists('StarBonusPlugin')) :
 					    </div>
 					    <br/>
 					    <div>
-						    <label for="expanded" style="line-height:40px"><strong>Domyślnie rozwinięta [T/N]</strong></label>
+						    <label for="expanded" style="line-height:40px"><strong>Domyślnie rozwinięta</strong></label>
 						    <input type="checkbox" name="expanded" ' . (((isset($_POST['expanded']) && $expanded) || (!isset($_POST['expanded']) && get_option('starbonus_expanded')))
                     ? 'checked="checked"'
                     : (get_option('starbonus_expanded') ? get_option('starbonus_expanded') : false)) . '>
@@ -894,8 +893,11 @@ if (!class_exists('StarBonusPlugin')) :
             global $reg_errors;
             $reg_errors = new WP_Error();
 
-            if (empty($clientId) || empty($clientPassword) || empty($programId) || empty($urlApi) || empty($orderTimestampLimit) || empty($openWidget) || empty($minWidth) || empty($widgetBelow)) {
+            if (empty($clientId) || empty($programId) || empty($urlApi) || empty($orderTimestampLimit) || empty($openWidget) || empty($minWidth) || empty($widgetBelow)) {
                 $reg_errors->add('field', 'Wypełnij wszystkie wymagane pola');
+            }
+            if ((empty($clientPassword) || $clientPassword === '******') && !get_option('starbonus_client_password')) {
+                $reg_errors->add('field', 'Aby zatwierdzić zmiany musisz podać hasło');
             }
             if ($orderTimestampLimit < 15 || $orderTimestampLimit > 30) {
                 $reg_errors->add('field', 'Limit akceptacji transakcji musi zawierać się w przedziale 15-30 dni');
@@ -918,7 +920,9 @@ if (!class_exists('StarBonusPlugin')) :
             global $reg_errors, $clientId, $clientPassword, $programId, $bonusId, $openWidget, $urlApi, $orderTimestampLimit, $source, $shippingCost, $expanded, $minWidth, $widgetBelow, $widgetSide, $skin, $animation, $showOnShop;
             if (1 > count($reg_errors->get_error_messages())) {
                 update_option('starbonus_client_id', $clientId);
-                update_option('starbonus_client_password', $clientPassword);
+                if (($clientPassword !== '******') && !empty($clientPassword)) {
+                    update_option('starbonus_client_password', $clientPassword);
+                }
                 update_option('starbonus_program_id', $programId);
                 update_option('starbonus_bonus_id', $bonusId);
                 update_option('starbonus_source', $source);
@@ -965,7 +969,7 @@ if (!class_exists('StarBonusPlugin')) :
                 $this->update_cilent_options();
             }
 
-            $this->client_details_form($clientId, $clientPassword, $programId, $bonusId, $source, $orderTimestampLimit, $shippingCost, $expanded, $minWidth, $widgetBelow, $animation, $showOnShop);
+            $this->client_details_form($clientId, $programId, $bonusId, $source, $orderTimestampLimit, $shippingCost, $expanded, $minWidth, $widgetBelow, $animation, $showOnShop);
         }
 
         /**
