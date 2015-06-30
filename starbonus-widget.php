@@ -5,7 +5,7 @@
  * Plugin URI: kontakt@starbonus.pl
  * Description: Wtyczka StarBonus.
  * Author: StarBonus Sp. z o.o.
- * Version: 1.0.7
+ * Version: 1.0.8
  */
 
 if (!class_exists('StarBonusPlugin')) :
@@ -30,6 +30,23 @@ if (!class_exists('StarBonusPlugin')) :
          * @var \Starbonus\Api\Api starbonusApi
          */
         protected $starbonusApi;
+
+        /**
+         * @var array
+         */
+        private static $functionNames = [
+            'is_account_page',
+            'is_view_order_page',
+            'is_order_received_page',
+            'is_shop',
+            'is_cart',
+            'is_checkout',
+            'is_product',
+            'is_product_taxonomy',
+            'is_product_category',
+            'is_checkout_pay_page',
+            'is_add_payment_method_page'
+        ];
 
         /**
          * Main StarBonusPlugin Instance
@@ -155,9 +172,12 @@ if (!class_exists('StarBonusPlugin')) :
         {
             if (get_option('starbonus_open_widget') === 'ever' || (get_option('starbonus_open_widget') === 'redirect' && $_COOKIE['starbonus_redirect'])) {
 
-                if (get_option('starbonus_show_on_shop') && function_exists('is_shop') && function_exists('is_cart')) {
-                    if (is_account_page() || is_account_page() || is_view_order_page() || is_order_received_page() || is_shop() || is_cart() || is_checkout() || is_product() || is_product_taxonomy() || is_product_category() || is_checkout_pay_page() || is_add_payment_method_page()) {
-                        $this->showScript();
+                if (get_option('starbonus_show_on_shop')) {
+                    foreach ($this->getFunctionNames() as $function) {
+                        if (function_exists($function) && $function()) {
+                            $this->showScript();
+                            break;
+                        }
                     }
                 } else {
                     $this->showScript();
@@ -1055,6 +1075,15 @@ if (!class_exists('StarBonusPlugin')) :
             }
 
             return $this->starbonusApi;
+        }
+
+        /**
+         * Get functionNames
+         *
+         * @return static array
+         */
+        public function getFunctionNames() {
+            return self::$functionNames;
         }
     }
 

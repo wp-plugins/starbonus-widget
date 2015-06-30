@@ -3,7 +3,7 @@ Contributors: StarBonus Sp. z o.o.
 Tags: starbonus, widget, wtyczka, cashback
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,9 @@ W przypadku używania pluginów typu 'Cache' należy pamiętać, aby po właczen
 4. Tak wygląda zminimalizowana Wtyczka StarBonus. Dostępna jest w kilku różnych wersjach kolorystycznych.
 
 == Changelog ==
+
+= 1.0.8 =
+* Obłużenie błędów spowodowanych konfliktami WooCommerce
 
 = 1.0.7 =
 * Wewnętrzne zmiany funkcjonalności
